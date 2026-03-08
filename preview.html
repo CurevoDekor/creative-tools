@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Herramientas Creativas</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f4f4;
+text-align:center;
+padding:40px;
+}
+
+h1{
+color:#333;
+}
+
+.caja{
+background:white;
+padding:20px;
+margin:20px auto;
+width:80%;
+max-width:500px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+cursor:pointer;
+}
+
+textarea{
+width:90%;
+height:120px;
+}
+
+.resultado{
+font-size:22px;
+margin-top:10px;
+color:#6a0dad;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Herramientas Creativas</h1>
+
+<div class="caja">
+<h2>Generador de nombres para juegos</h2>
+<button onclick="nombre()">Generar</button>
+<div class="resultado" id="nombre"></div>
+</div>
+
+<div class="caja">
+<h2>Generador de ideas de historias</h2>
+<button onclick="historia()">Generar idea</button>
+<div class="resultado" id="historia"></div>
+</div>
+
+<div class="caja">
+<h2>Contador de palabras</h2>
+
+<textarea id="texto" oninput="contar()"></textarea>
+
+<p id="conteo">Palabras: 0</p>
+
+</div>
+
+<script>
+
+const inicio=["Ar","Bel","Vor","Kal","Mor","Vel","Zan","Tor"];
+const final=["dor","mir","th","nar","ion","dras","veth","lor"];
+
+function nombre(){
+
+let i=inicio[Math.floor(Math.random()*inicio.length)];
+let f=final[Math.floor(Math.random()*final.length)];
+
+document.getElementById("nombre").innerText=i+f;
+
+}
+
+const ideas=[
+"Un dragón protege un libro que predice el futuro.",
+"Una ciudad aparece solo una vez cada cien años.",
+"Un robot comienza a soñar con libertad.",
+"Un explorador encuentra un portal a otro mundo.",
+"Un niño descubre que puede detener el tiempo."
+];
+
+function historia(){
+
+let idea=ideas[Math.floor(Math.random()*ideas.length)];
+
+document.getElementById("historia").innerText=idea;
+
+}
+
+function contar(){
+
+let texto=document.getElementById("texto").value;
+
+let palabras=texto.trim().split(/\s+/);
+
+if(texto.trim()==""){
+palabras=[];
+}
+
+document.getElementById("conteo").innerText="Palabras: "+palabras.length;
+
+}
+
+</script>
+
+</body>
+</html>
