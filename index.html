@@ -1,122 +1,197 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Herramientas Creativas</title>
+<title>Creative Tools Hub</title>
 
 <style>
 
 body{
-font-family: Arial;
-background:#f4f4f4;
+font-family:Arial;
+background:#f0f2f5;
 text-align:center;
 padding:40px;
 }
 
 h1{
-color:#333;
+color:#222;
 }
 
-.caja{
+.tool{
 background:white;
-padding:20px;
-margin:20px auto;
-width:80%;
-max-width:500px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+padding:25px;
+margin:25px auto;
+max-width:600px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
 button{
 padding:10px 20px;
 font-size:16px;
 cursor:pointer;
+margin-top:10px;
+}
+
+.result{
+font-size:22px;
+margin-top:15px;
+color:#6b3df0;
 }
 
 textarea{
 width:90%;
 height:120px;
-}
-
-.resultado{
-font-size:22px;
 margin-top:10px;
-color:#6a0dad;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<h1>Herramientas Creativas</h1>
+<h1>Creative Tools Hub</h1>
+<p>Free online generators for writers, gamers and creators.</p>
 
-<div class="caja">
-<h2>Generador de nombres para juegos</h2>
-<button onclick="nombre()">Generar</button>
-<div class="resultado" id="nombre"></div>
+<div class="tool">
+
+<h2>Fantasy Name Generator</h2>
+<button onclick="fantasyName()">Generate</button>
+<div id="fantasy" class="result"></div>
+
 </div>
 
-<div class="caja">
-<h2>Generador de ideas de historias</h2>
-<button onclick="historia()">Generar idea</button>
-<div class="resultado" id="historia"></div>
+<div class="tool">
+
+<h2>Dragon Name Generator</h2>
+<button onclick="dragonName()">Generate</button>
+<div id="dragon" class="result"></div>
+
 </div>
 
-<div class="caja">
-<h2>Contador de palabras</h2>
+<div class="tool">
 
-<textarea id="texto" oninput="contar()"></textarea>
+<h2>Story Idea Generator</h2>
+<button onclick="storyIdea()">Generate Idea</button>
+<div id="story" class="result"></div>
 
-<p id="conteo">Palabras: 0</p>
+</div>
+
+<div class="tool">
+
+<h2>Random Character Generator</h2>
+<button onclick="characterGen()">Generate Character</button>
+<div id="character" class="result"></div>
+
+</div>
+
+<div class="tool">
+
+<h2>Password Generator</h2>
+<button onclick="passwordGen()">Generate Password</button>
+<div id="password" class="result"></div>
+
+</div>
+
+<div class="tool">
+
+<h2>Word Counter</h2>
+<textarea id="text" oninput="countWords()"></textarea>
+<p id="wordcount">Words: 0</p>
 
 </div>
 
 <script>
 
-const inicio=["Ar","Bel","Vor","Kal","Mor","Vel","Zan","Tor"];
-const final=["dor","mir","th","nar","ion","dras","veth","lor"];
+function random(arr){
+return arr[Math.floor(Math.random()*arr.length)];
+}
 
-function nombre(){
+function fantasyName(){
 
-let i=inicio[Math.floor(Math.random()*inicio.length)];
-let f=final[Math.floor(Math.random()*final.length)];
+let start=["Ar","Bel","Vor","Kal","Mor","Vel","Zan","Tor","Eld","Syl"];
+let end=["dor","mir","th","nar","ion","dras","veth","lor","rian","dell"];
 
-document.getElementById("nombre").innerText=i+f;
+document.getElementById("fantasy").innerText=random(start)+random(end);
 
 }
 
-const ideas=[
-"Un dragón protege un libro que predice el futuro.",
-"Una ciudad aparece solo una vez cada cien años.",
-"Un robot comienza a soñar con libertad.",
-"Un explorador encuentra un portal a otro mundo.",
-"Un niño descubre que puede detener el tiempo."
+function dragonName(){
+
+let start=["Drak","Zor","Thar","Vyr","Krath","Rax","Ign","Pyro"];
+let end=["gor","thar","nix","rax","zor","drake","thos"];
+
+document.getElementById("dragon").innerText=random(start)+random(end);
+
+}
+
+function storyIdea(){
+
+let ideas=[
+
+"A hidden city appears once every 100 years.",
+"A dragon guards a forgotten library.",
+"A robot begins to dream about freedom.",
+"A traveler finds a portal to another world.",
+"A mysterious book predicts the future.",
+"A kingdom disappears overnight.",
+"A scientist invents a machine that reads memories."
+
 ];
 
-function historia(){
-
-let idea=ideas[Math.floor(Math.random()*ideas.length)];
-
-document.getElementById("historia").innerText=idea;
+document.getElementById("story").innerText=random(ideas);
 
 }
 
-function contar(){
+function characterGen(){
 
-let texto=document.getElementById("texto").value;
+let roles=["warrior","mage","thief","explorer","scientist","knight","merchant"];
+let traits=["brave","cunning","curious","mysterious","lonely","rebellious","wise"];
+let goals=["seeking revenge","searching for treasure","trying to save a kingdom","looking for lost knowledge"];
 
-let palabras=texto.trim().split(/\s+/);
+document.getElementById("character").innerText=
 
-if(texto.trim()==""){
-palabras=[];
+"A "+random(traits)+" "+random(roles)+" "+random(goals)+".";
+
 }
 
-document.getElementById("conteo").innerText="Palabras: "+palabras.length;
+function passwordGen(){
+
+let chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
+let pass="";
+
+for(let i=0;i<12;i++){
+
+pass+=chars[Math.floor(Math.random()*chars.length)];
+
+}
+
+document.getElementById("password").innerText=pass;
+
+}
+
+function countWords(){
+
+let text=document.getElementById("text").value.trim();
+
+if(text===""){
+
+document.getElementById("wordcount").innerText="Words: 0";
+return;
+
+}
+
+let words=text.split(/\s+/);
+
+document.getElementById("wordcount").innerText="Words: "+words.length;
 
 }
 
 </script>
 
 </body>
+
 </html>
